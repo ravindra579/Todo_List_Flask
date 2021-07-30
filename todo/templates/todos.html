@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="alert alert-dismissible" role="alert"
+	 style="display:none">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <p></p>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Todo List:</h1>
+    <table class="table table-striped">
+      <th>#</th><th>User</th><th>Description</th>
+	  <th>View JSON</th><th></th><th>Done</th>
+      {% for todo in todos.items %}
+      {% include "todo_row.html" %}
+	  {% endfor %}
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="input-group col-md-8 col-md-offset-2">
+	<input type="text" class="form-control"
+		   placeholder="Description..."
+		   name="description">
+	<div class="input-group-btn">
+	  <button type="button" onclick="addTodo({{ todos.page }});"
+			  class="btn btn-primary">
+		<span class="glyphicon glyphicon-plus"></span>
+	  </button>
+	</div>
+  </div>
+</div>
+
+<nav aria-label="Page navigation">
+{% include "pagination.html" %}
+</nav>
+  
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript"
+src="{{ url_for('static', filename='js/todo.js') }}">
+</script>
+{% endblock %}
